@@ -15,12 +15,12 @@ class CreateTransactionTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
             $table->integer('user_id');
             $table->integer('insurance_price');
             $table->integer('shipping_price');
             $table->integer('total_price');
             $table->string('transaction_status');
-            $table->string('resi');
             $table->softDeletes();
             $table->timestamps();
         });

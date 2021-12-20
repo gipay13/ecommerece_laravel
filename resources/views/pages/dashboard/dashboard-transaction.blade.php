@@ -3,30 +3,18 @@
 @section('title', 'Dashboard Transaction Page')
 
 @section('content')
-    <div
-            class="section-content section-dashboard-home"
-            data-aos="fade-up"
-          >
-            <div class="container-fluid">
-              <div class="dashboard-heading">
+    <div class="section-content section-dashboard-home" data-aos="fade-up">
+        <div class="container-fluid">
+            <div class="dashboard-heading">
                 <h2 class="dashboard-title">Transactions</h2>
                 <p class="dashboard-subtitle">
                   Big result start from the small one
                 </p>
-              </div>
-              <div class="dashboard-content">
+            </div>
+            <div class="dashboard-content">
                 <ul class="nav nav-pills" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <a
-                      class="nav-link active"
-                      id="sell-tab"
-                      data-toggle="tab"
-                      href="#sell"
-                      role="tab"
-                      aria-controls="sell"
-                      aria-selected="true"
-                      >Sell Product</a
-                    >
+                    <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="sell-tab" data-toggle="tab" href="#sell" role="tab" aria-controls="sell" aria-selected="true">Sell Product</a>
                   </li>
                   <li class="nav-item" role="presentation">
                     <a

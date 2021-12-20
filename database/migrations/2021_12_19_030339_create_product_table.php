@@ -20,6 +20,7 @@ class CreateProductTable extends Migration
             $table->integer('category_id');
             $table->integer('price');
             $table->text('description');
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
         });

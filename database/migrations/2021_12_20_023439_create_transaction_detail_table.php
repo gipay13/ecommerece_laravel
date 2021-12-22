@@ -15,12 +15,12 @@ class CreateTransactionDetailTable extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code', 50);
             $table->integer('transaction_id');
             $table->integer('product_id');
             $table->integer('price');
-            $table->string('shipping_status');
-            $table->string('resi');
+            $table->string('shipping_status', 15);
+            $table->string('resi', 20);
             $table->timestamps();
         });
     }

@@ -38,37 +38,47 @@ Route::get('/register/success', function () {
     return view('auth.register-success');
 })->name('register-success');
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard.dashboard');
-})->name('dashboard');
+Route::prefix('user/dashboard')->namespace('user')->name('user.')->group(function () {
+    Route::get('/', function () {
+        return view('pages.dashboard.user.dashboard');
+    })->name('dashboard');
 
-Route::get('/dashboard/product', function () {
-    return view('pages.dashboard.dashboard-product');
-})->name('dashboard-product');
+    Route::get('/product', function () {
+        return view('pages.dashboard.user.dashboard-product');
+    })->name('dashboard-product');
 
-Route::get('/dashboard/product/details/{id}', function () {
-    return view('pages.dashboard.dashboard-product-detail');
-})->name('dashboard-product-detail');
+    Route::get('/product/details/{id}', function () {
+        return view('pages.dashboard.user.dashboard-product-detail');
+    })->name('dashboard-product-detail');
 
-Route::get('/dashboard/product/create', function () {
-    return view('pages.dashboard.dashboard-product-create');
-})->name('dashboard-product-create');
+    Route::get('/product/create', function () {
+        return view('pages.dashboard.user.dashboard-product-create');
+    })->name('dashboard-product-create');
 
-Route::get('/dashboard/transaction', function () {
-    return view('pages.dashboard.dashboard-transaction');
-})->name('dashboard-transaction');
+    Route::get('/transaction', function () {
+        return view('pages.dashboard.user.dashboard-transaction');
+    })->name('dashboard-transaction');
 
-Route::get('/dashboard/transaction/details/{id}', function () {
-    return view('pages.dashboard.dashboard-transaction-detail');
-})->name('dashboard-transaction-detail');
+    Route::get('/transaction/details/{id}', function () {
+        return view('pages.dashboard.user.dashboard-transaction-detail');
+    })->name('dashboard-transaction-detail');
 
-Route::get('/dashboard/account', function () {
-    return view('pages.dashboard.dashboard-account');
-})->name('dashboard-account');
+    Route::get('/account', function () {
+        return view('pages.dashboard.user.dashboard-account');
+    })->name('dashboard-account');
 
-Route::get('/dashboard/setting', function () {
-    return view('pages.dashboard.dashboard-setting');
-})->name('dashboard-setting');
+    Route::get('/setting', function () {
+        return view('pages.dashboard.user.dashboard-setting');
+    })->name('dashboard-setting');
+});
+
+Route::prefix('admin/dashboard')->namespace('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('pages.dashboard.admin.dashboard');
+    })->name('dashboard');
+});
+
+
 
 
 // Route::get('/dashboard', function () {
@@ -76,3 +86,7 @@ Route::get('/dashboard/setting', function () {
 // })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+//lihat disini jika ingin tau apa saja yang diperlukan untuk role dan permission
+//jika ingin lebih cepat gunakan jetstream
+//https://www.youtube.com/watch?v=kZOgH3-0Bko&ab_channel=LaravelDaily

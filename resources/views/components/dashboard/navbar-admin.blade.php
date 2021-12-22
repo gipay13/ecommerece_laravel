@@ -15,16 +15,10 @@
                     Hi, Angga
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('home') }}">Back to Store</a>
-                    <a class="dropdown-item" href="dashboard-account.html">Settings</a>
-                    <div class="dropdown-divider"></div>
+                    {{-- <a class="dropdown-item" href="{{ route('home') }}">Back to Store</a> --}}
+                    {{-- <div class="dropdown-divider"></div> --}}
                     <a class="dropdown-item" href="">Logout</a>
                   </div>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link d-inline-block mt-2" href="#">
-                    <img src="/images/icon-cart-empty.svg" alt="" />
-                  </a>
                 </li>
               </ul>
               <!-- Mobile Menu -->

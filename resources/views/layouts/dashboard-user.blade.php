@@ -16,10 +16,10 @@
     <body>
         <div class="page-dashboard">
             <div class="d-flex" id="wrapper" data-aos="fade-right">
-                @include('components.dashboard.sidebar')
+                @include('components.dashboard.sidebar-user')
 
                 <div id="page-content-wrapper">
-                    @include('components.dashboard.navbar')
+                    @include('components.dashboard.navbar-user')
 
                     @yield('content')
                 </div>

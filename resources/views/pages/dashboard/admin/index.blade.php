@@ -20,7 +20,7 @@
                           Customer
                         </div>
                         <div class="dashboard-card-subtitle">
-                          15,209
+                          {{ $user }}
                         </div>
                       </div>
                     </div>

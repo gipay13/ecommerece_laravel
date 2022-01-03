@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -74,10 +75,8 @@ Route::prefix('user/dashboard')->namespace('user')->name('user.')->group(functio
 });
 
 Route::prefix('admin/dashboard')->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('pages.dashboard.admin.index');
-    })->name('dashboard');
-    
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::resource('category', CategoryController::class);
 });
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,45 +41,49 @@ Route::get('/register/success', function () {
 
 Route::prefix('user/dashboard')->namespace('user')->name('user.')->group(function () {
     Route::get('/', function () {
-        return view('pages.dashboard.user.dashboard');
+        return view('pages.dashboard.user.index');
     })->name('dashboard');
 
     Route::get('/product', function () {
-        return view('pages.dashboard.user.dashboard-product');
+        return view('pages.dashboard.user.product');
     })->name('dashboard-product');
 
     Route::get('/product/details/{id}', function () {
-        return view('pages.dashboard.user.dashboard-product-detail');
+        return view('pages.dashboard.user.product-detail');
     })->name('dashboard-product-detail');
 
     Route::get('/product/create', function () {
-        return view('pages.dashboard.user.dashboard-product-create');
+        return view('pages.dashboard.user.product-create');
     })->name('dashboard-product-create');
 
     Route::get('/transaction', function () {
-        return view('pages.dashboard.user.dashboard-transaction');
+        return view('pages.dashboard.user.transaction');
     })->name('dashboard-transaction');
 
     Route::get('/transaction/details/{id}', function () {
-        return view('pages.dashboard.user.dashboard-transaction-detail');
+        return view('pages.dashboard.user.transaction-detail');
     })->name('dashboard-transaction-detail');
 
     Route::get('/account', function () {
-        return view('pages.dashboard.user.dashboard-account');
+        return view('pages.dashboard.user.account');
     })->name('dashboard-account');
 
     Route::get('/setting', function () {
-        return view('pages.dashboard.user.dashboard-setting');
+        return view('pages.dashboard.user.setting');
     })->name('dashboard-setting');
 });
 
-Route::prefix('admin/dashboard')->namespace('admin')->name('admin.')->group(function () {
+Route::prefix('admin/dashboard')->name('admin.')->group(function () {
     Route::get('/', function () {
-        return view('pages.dashboard.admin.dashboard');
+        return view('pages.dashboard.admin.index');
     })->name('dashboard');
+    
+    Route::resource('category', CategoryController::class);
 });
 
-
+Route::get('/debug-sentry', function () {
+    throw new Exception('My first Sentry error!');
+});
 
 
 // Route::get('/dashboard', function () {

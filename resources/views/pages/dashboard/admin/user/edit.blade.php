@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-admin')
 
-@section('title', 'Dashboard Admin | Category Page')
+@section('title', 'Dashboard Admin | User Page')
 
 @section('content')
     <div class="section-content section-dashboard-home" data-aos="fade-up">
@@ -8,7 +8,7 @@
             <div class="dashboard-heading">
                 <h2 class="dashboard-title">Admin Dashboard</h2>
                 <p class="dashboard-subtitle">
-                  Edit Category
+                  Edit User
                 </p>
             </div>
             <div class="dashboard-content">
@@ -25,29 +25,30 @@
                         @endif
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin.category.update', $item->id) }}" method="post" enctype="multipart/form-data">
+                                <form action="{{ route('admin.user.update', $item->id) }}" method="post" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="name">Category Name</label>
+                                                <label for="name">Name</label>
                                                 <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ $item->name }}">
                                             </div>
                                             <div class="form-group">
-                                                <label for="photo">Category Photo</label>
-                                                <input type="file" name="photo" id="photo" class="form-control @error('photo') is-invalid @enderror">
-                                                <small class="text-danger">Leave blank if you didn't want to change</small>
+                                                <label for="email">Email</label>
+                                                <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ $item->email }}">
                                             </div>
-                                            <div class="form-group mt-5">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <label>Current Category Photo</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <img src="{{ Storage::url($item->photo) }}" alt="Category Logo" style="max-height: 100px">
-                                                    </div>
-                                                </div>
+                                            <div class="form-group">
+                                                <label for="password">Password</label>
+                                                <input type="password" name="password" id="password" class="form-control">
+                                                <small class="text-danger">Leave blank if you dont want to change</small>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="roles">Name</label>
+                                                <select name="roles" id="roles" class="form-control @error('roles') is-invalid @enderror">
+                                                    <option value="admin" {{ $item->roles == 'admin' ? 'selected' : '' }}>Admin</option>
+                                                    <option value="user" {{ $item->roles == 'user' ? 'selected' : '' }}>User</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

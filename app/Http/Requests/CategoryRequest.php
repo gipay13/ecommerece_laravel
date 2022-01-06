@@ -25,7 +25,18 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name'  => 'required|string',
-            'photo' => 'required|image'
+            'photo' => 'required|image|mimes:svg'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Name is required',
+            'name.string'   => 'Name must be a character',
+            'photo.required' => 'Photo is required',
+            'photo.image' => 'Photo must be an image',
+            'photo.mimes' => 'Photo must be an svg'
         ];
     }
 }

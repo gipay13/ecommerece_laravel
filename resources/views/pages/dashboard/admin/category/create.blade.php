@@ -31,11 +31,11 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="name">Category Name</label>
-                                                <input type="text" name="name" id="name" class="form-control">
+                                                <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="photo">Category Photo</label>
-                                                <input type="file" name="photo" id="photo" class="form-control">
+                                                <input type="file" name="photo" id="photo" class="form-control @error('photo') is-invalid @enderror">
                                             </div>
                                         </div>
                                     </div>

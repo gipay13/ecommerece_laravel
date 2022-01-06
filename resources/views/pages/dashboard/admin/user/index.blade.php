@@ -8,7 +8,7 @@
             <div class="dashboard-heading">
                 <h2 class="dashboard-title">Admin Dashboard</h2>
                 <p class="dashboard-subtitle">
-                  List Category
+                  List User
                 </p>
             </div>
             <div class="dashboard-content">
@@ -16,15 +16,15 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-primary mb-5">+ Create</a>
+                                <a href="{{ route('admin.user.create') }}" class="btn btn-primary mb-5">+ Create</a>
                                 <div class="table-responsive">
-                                    <table class="table table-striped" id="categoryTable">
+                                    <table class="table table-striped" id="userTable">
                                         <thead>
                                             <tr>
-                                                <th>Id</th>
+                                                <th>No</th>
                                                 <th>Name</th>
-                                                <th>Logo</th>
-                                                <th>Slug</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -42,7 +42,7 @@
 
 @push('after-script')
     <script>
-        $('#categoryTable').DataTable({
+        $('#userTable').DataTable({
             processing: true,
             serverSide: true,
             ordering: true,
@@ -52,8 +52,8 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'name', name: 'name' },
-                { data: 'photo', name: 'photo' },
-                { data: 'slug', name: 'slug' },
+                { data: 'email', name: 'email' },
+                { data: 'roles', name: 'roles' },
                 { data: 'action', name: 'action', orderable: false, searchable: false, width: "15%" },
             ],
         });

@@ -7,6 +7,6 @@
         <a href="" class="list-group-item list-group-item-action">Products</a>
         <a href="{{ route('admin.category.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/dashboard/category*')) ? 'active' : '' }}">Categories</a>
         <a href="dashboard-settings.html" class="list-group-item list-group-item-action">Transaction</a>
-        <a href="dashboard-account.html" class="list-group-item list-group-item-action">Users</a>
+        <a href="{{ route('admin.user.index') }}" class="list-group-item list-group-item-action {{ (request()->is('admin/dashboard/user*')) ? 'active' : '' }}">Users</a>
     </div>
 </div>

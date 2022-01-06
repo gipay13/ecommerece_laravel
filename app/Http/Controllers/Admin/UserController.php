@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Validation\Rules\Password as RulesPassword;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        if(request()->ajax()) {
-            $query = Category::query();
+       if(request()->ajax()) {
+            $query = User::query();
 
             return DataTables::of($query)->addColumn('action', function($item) {
                 return '
@@ -28,8 +28,8 @@ class CategoryController extends Controller
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle mr-1" type="button" data-toggle="dropdown">Action</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="'.route('admin.category.edit', $item->id).'">Edit</a>
-                                <form action="'.route('admin.category.destroy', $item->id).'" method="post">
+                                <a class="dropdown-item" href="'.route('admin.user.edit', $item->id).'">Edit</a>
+                                <form action="'.route('admin.user.destroy', $item->id).'" method="post">
                                     '.method_field('delete').csrf_field().'
                                     <button type="submit" class="dropdown-item text-danger">Delete</button>
                                 </form>
@@ -37,11 +37,9 @@ class CategoryController extends Controller
                         </div>
                     </div>
                 ';
-            })->editColumn('photo', function($item) {
-                return $item->photo ? '<img src="'.Storage::url($item->photo).'" style="max-height: 40px"/>' : '';
-            })->rawColumns(['action', 'photo'])->make();
+            })->rawColumns(['action'])->make();
         }
-        return view('pages.dashboard.admin.category.index');
+        return view('pages.dashboard.admin.user.index');
     }
 
     /**
@@ -51,7 +49,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.admin.category.create');
+        return view('pages.dashboard.admin.user.create');
     }
 
     /**
@@ -60,16 +58,14 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(UserRequest $request)
     {
-        // ddd($request);
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        $data['photo'] = $request->file('photo')->store('category', 'public');
+        $data['password'] = Hash::make($request->password);
 
-        Category::create($data);
+        User::create($data);
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -93,11 +89,11 @@ class CategoryController extends Controller
     {
         // edit bisa menggunakan slug juga daripada id
 
-        $item = Category::findOrFail($id);
+        $item = User::findOrFail($id);
 
         $data = ['item' => $item];
 
-        return view('pages.dashboard.admin.category.edit', $data);
+        return view('pages.dashboard.admin.user.edit', $data);
     }
 
     /**
@@ -109,24 +105,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $item = Category::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required|string'
-        ]);
+        $item = User::findOrFail($id);
 
         $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
 
-        if($request->photo) {
-            $data['photo'] = $request->file('photo')->store('category', 'public');
+        if($request->password) {
+            $request->validate([
+                'name'  => 'required|string',
+                'email' => 'required|email|unique:users,email,'.$item->id,
+                'password'  => RulesPassword::min(8)->mixedCase()->numbers(),
+                'roles' => 'required|in:admin,user'
+            ]);
 
-            Storage::disk('local')->delete('public/'.$item->photo);
+            $data['password'] = Hash::make($request->password);
+        } else {
+            $request->validate([
+                'name'  => 'required|string',
+                'email' => 'required|email|unique:users,email,'.$item->id,
+                'roles' => 'required|in:admin,user'
+            ]);
+
+            unset($data['password']);
         }
+
 
         $item->update($data);
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -137,9 +142,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $item = Category::findOrFail($id);
+        $item = User::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.user.index');
     }
 }

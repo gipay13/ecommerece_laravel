@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-admin')
 
-@section('title', 'Dashboard Admin')
+@section('title', 'Dashboard Admin | User Page')
 
 @section('content')
     <div class="section-content section-dashboard-home" data-aos="fade-up">
